@@ -1,13 +1,13 @@
 import { nanoid } from "nanoid";
-import { Component } from "react";
+import { useState } from "react";
 import Searchbar from "../Searchbar";
 import styles from "./GallerySearchForm.module.css";
-class GallerySearchForm extends Component {
-    state = {
-        search: ""
-    }
-    searchId = nanoid();
-    searchInput = {
+
+const GallerySearchForm = ({ onSubmit }) =>  {
+    const [search, setSearch] = useState("");
+    
+    const searchId = nanoid();
+    const searchInput = {
         type: "text",
         name: "search",
         autoComplete: "off",
@@ -15,27 +15,19 @@ class GallerySearchForm extends Component {
         placeholder: "Search images and photos", 
         required: true,
     }
-    handleChange = (e) => {
-        const { value, name } = e.target;
-        this.setState({
-            [name]: value
-        })
+    const handleChange = (e) => {
+        const { value } = e.target;
+        setSearch(value);
     }
-    handleSubmitForm = (e) => {
+    const handleSubmitForm = (e) => {
         e.preventDefault();
-        const { onSubmit } = this.props;
-        onSubmit({...this.state});
-        this.reset();
+        onSubmit({ search });
+        reset();
     }
-    reset() {
-        this.setState({
-            search: "",
-        })
+    const reset = () => {
+        setSearch("");
     }
-    render() {
-        const { search } = this.state;
-        const { handleSubmitForm, searchId, handleChange, searchInput } = this;
-        return (
+    return (
             <header className={styles.searchbar}>
                 <form className={styles.searchForm} onSubmit={handleSubmitForm}>
                     <button type="submit" className={styles.searchFormButton} onClick={ handleSubmitForm}>
@@ -52,6 +44,6 @@ class GallerySearchForm extends Component {
             </header>
                 
         )
-    }
 }
+
 export default GallerySearchForm;
