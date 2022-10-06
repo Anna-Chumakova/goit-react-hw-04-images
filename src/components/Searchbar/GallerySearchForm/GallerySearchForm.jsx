@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import propTypes from "prop-types";
 import Searchbar from "../Searchbar";
 import styles from "./GallerySearchForm.module.css";
 
@@ -45,5 +46,7 @@ const GallerySearchForm = ({ onSubmit }) =>  {
                 
         )
 }
-
+GallerySearchForm.propTypes = {
+    onSubmit: propTypes.func
+}
 export default GallerySearchForm;
