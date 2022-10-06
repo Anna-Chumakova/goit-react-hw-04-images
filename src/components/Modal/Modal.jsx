@@ -1,4 +1,4 @@
-//import { useEffect } from "react";
+
 import { useEffect } from "react";
 import { createPortal } from "react-dom"
 import styles from "./Modal.module.css";
@@ -17,8 +17,9 @@ const Modal = ({children, onClose}) => {
   const closeModal = ({ target, currentTarget, code }) => {
     if (target === currentTarget || code === "Escape") {
       onClose();
+    }  
   }
-    return createPortal(
+  return createPortal(
       <div className={styles.overlay} onClick={closeModal}>
         <div className={styles.modal}>
           <span className={styles.close} onClick={closeModal}>X</span>
@@ -27,7 +28,6 @@ const Modal = ({children, onClose}) => {
       </div>,
       modalRoot
     )
-  }
 }
 export default Modal;
 // export default class Modal extends Component {
